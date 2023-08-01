@@ -1,9 +1,14 @@
 import styles from './page.module.css'
-import {Layout} from "antd";
+import {getSessionAccount, getSessionData} from "@/hooks/getSessionAccount";
+import {redirect} from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSessionData();
+  if (!session?.isLoggedIn) {
+    redirect('/auth');
+  }
   return (
-    <Layout className={styles.main}>
-    </Layout>
+    <main className={styles.main}>
+    </main>
   )
 }

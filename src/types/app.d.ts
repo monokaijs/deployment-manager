@@ -17,3 +17,7 @@ interface AppEnvironment {
   name: string;
   variables: string[];
 }
+
+interface Account {
+  name: string;
+}

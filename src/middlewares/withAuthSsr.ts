@@ -9,7 +9,7 @@ export const withAuthSsr = (fn: SsrHandler) => {
       return {
         redirect: {
           permanent: false,
-          destination: '/auth/login'
+          destination: '/auth'
         }
       }
     }
