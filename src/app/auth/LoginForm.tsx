@@ -1,6 +1,6 @@
 "use client";
 import React, {useEffect, useState, useTransition} from "react";
-import {Button, Form, FormProps, Input, Typography} from "antd";
+import {Button, Form, FormProps, Input, message, Typography} from "antd";
 import {processLogin} from "@/actions/auth";
 import {useRouter} from "next/navigation";
 
@@ -10,19 +10,15 @@ export const LoginForm = () => {
   const router = useRouter()
 
   const onFinish = (values: any) => {
-    startTransition(() => processLogin(values))
-  }
-
-  useEffect(() => {
-    console.log('pending', isPending);
-    if (!isPending) {
-      setIsSubmitting(!isSubmitting);
-      if (isSubmitting) {
-        // done
+    fetch('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(values)
+    }).then(r => r.json()).then((response) => {
+      message.success(response.message).then(() => {
         router.replace('/');
-      }
-    }
-  }, [isPending]);
+      });
+    });
+  }
 
   return <Form
     layout={'vertical'}

@@ -21,6 +21,5 @@ export async function getSessionData(): Promise<IronSessionData> {
 }
 
 export const setSessionData = async (data: IronSessionData) => {
-  const response = NextResponse.next();
-  return response.cookies.set(sessionConfig.cookieName, await sealData(data, sessionConfig));
+  return cookies().set(sessionConfig.cookieName, await sealData(data, sessionConfig));
 }
